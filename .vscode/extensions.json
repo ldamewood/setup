@@ -1,0 +1,15 @@
+{
+    "recommendations": [
+            "aaron-bond.better-comments",
+            "ban.spellright",
+            "eamodio.gitlens",
+            "editorconfig.editorconfig",
+            "github.vscode-pull-request-github",
+            "ms-vscode.makefile-tools",
+            "redhat.ansible",
+            "ryanluker.vscode-coverage-gutters",
+            "tyriar.sort-lines",
+            "vscode-icons-team.vscode-icons",
+            "vscodevim.vim",
+    ]
+}

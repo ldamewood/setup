@@ -1,0 +1,4 @@
+/secrets
+/secrets.enc
+/venv/
+.vault-password.txt

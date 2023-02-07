@@ -1,0 +1,52 @@
+# code: language=ansible
+- name: Setup git
+  vars_files:
+    - ../secrets.enc
+  hosts: localhost
+  become: false
+  tasks:
+    - name: "Setup user"
+      community.general.git_config:
+        scope: global
+        name: user.name
+        value: "{{ git_user }}"
+    - name: "Setup user"
+      community.general.git_config:
+        scope: global
+        name: user.email
+        value: "{{ git_email }}"
+    - name: "Setup user"
+      community.general.git_config:
+        scope: global
+        name: user.signingkey
+        value: "{{ git_signing_key }}"
+    - name: "Alias git pf"
+      community.general.git_config:
+        scope: global
+        name: alias.pf
+        value: push --force
+    - name: "Alias git mb"
+      community.general.git_config:
+        scope: global
+        name: alias.mb
+        value: merge-base HEAD
+    - name: "Alias git ri"
+      community.general.git_config:
+        scope: global
+        name: alias.ri
+        value: rebase -i
+    - name: "Alias git purge"
+      community.general.git_config:
+        scope: global
+        name: alias.purge
+        value: "!git ls-files --others -X .exclude -x .exclude -x .envrc -z | xargs -0 rm -v"
+    - name: "Sign git commits"
+      community.general.git_config:
+        scope: global
+        name: commit.gpgsign
+        value: true
+    - name: "Sign git tags"
+      community.general.git_config:
+        scope: global
+        name: tag.gpgsign
+        value: true
