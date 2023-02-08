@@ -9,7 +9,7 @@
       community.general.git_config:
         scope: global
         name: user.name
-        value: "{{ git_user }}"
+        value: "{{ git_name }}"
     - name: "Setup user"
       community.general.git_config:
         scope: global
@@ -19,7 +19,7 @@
       community.general.git_config:
         scope: global
         name: user.signingkey
-        value: "{{ git_signing_key }}"
+        value: "{{ git_signingkey }}"
     - name: "Alias git pf"
       community.general.git_config:
         scope: global
