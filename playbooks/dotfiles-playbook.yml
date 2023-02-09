@@ -1,19 +1,23 @@
 # code: language=ansible
 - name: Setup home directory
   hosts: localhost
+  gather_facts: true
   become: false
   tasks:
     - name: "Install Oh My ZSH"
       ansible.builtin.shell: /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
       args:
-        creates: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
+        creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
     - name: "Setup zprofile"
       ansible.builtin.copy:
-        dest: "{{ lookup('env', 'HOME') }}/.zprofile"
+        dest: "{{ ansible_env.HOME }}/.zprofile"
         content: |
           eval "$(ssh-agent -s)"
-          case "${OSTYPE}" in
-            darwin*)
+          case "${OSTYPE}|$(arch)" in
+            darwin*|i386)
+              eval "$(/usr/local/bin/brew shellenv)"
+              ;;
+            darwin*|aarch64)
               eval "$(/opt/homebrew/bin/brew shellenv)"
               ;;
           esac

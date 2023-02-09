@@ -28,3 +28,5 @@ My setup for local instances using ansible.
 * Start defining specific instances across the network.
     * Use ansible tags and inventories.
 * Configure more applications.
+* https://galaxy.ansible.com/staticdev/firefox
+* https://raw.githubusercontent.com/arkenfox/user.js/master/user.js

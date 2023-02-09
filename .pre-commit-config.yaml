@@ -11,13 +11,13 @@ repos:
       - id: check-symlinks
       - id: check-vcs-permalinks
       - id: detect-private-key
-      - id: detect-aws-credentials
       - id: fix-byte-order-marker
       - id: forbid-submodules
   - repo: https://github.com/ansible/ansible-lint.git
     rev: v6.12.1
     hooks:
       - id: ansible-lint
+        files: \.(yaml|yml)$
         additional_dependencies:
           - .
           - pytest

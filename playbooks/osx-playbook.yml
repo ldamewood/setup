@@ -6,49 +6,67 @@
   become: false
   vars:
     mas_installed_apps:
-      - { id: 411643860, name: "DaisyDisk (4.3.2)" }
-      - { id: 937984704, name: "Amphetamine (5.2.2)" }
-    # mas_uninstalled_apps:
-    #   - { id: 408981434, name: "iMovie" }
-    #   - { id: 409183694, name: "Keynote" }
-    #   - { id: 409201541, name: "Pages" }
-    #   - { id: 409203825, name: "Numbers" }
-    #   - { id: 682658836, name: "GarageBand" }
+      - { id: 411643860, name: "DaisyDisk" }
+      - { id: 937984704, name: "Amphetamine" }
+      - { id: 1475387142, name: TailScale}
+    mas_uninstalled_apps:
+      - { id: 408981434, name: "iMovie" }
+      - { id: 409183694, name: "Keynote" }
+      - { id: 409201541, name: "Pages" }
+      - { id: 409203825, name: "Numbers" }
+      - { id: 682658836, name: "GarageBand" }
     homebrew_use_brewfile: false
     homebrew_taps:
       - homebrew/core
       - homebrew/bundle
       - homebrew/cask
+      - homebrew/cask-fonts
     homebrew_installed_packages:
       - gh
+      - git-delta
       - direnv
-      - circleci
       - python@3.8
       - python@3.9
       - python@3.10
       - python@3.11
+      - ghcup
       - poetry
       - the_silver_searcher
       - zsh
     homebrew_cask_apps:
-      - google-chrome
       - firefox
-      - iterm2
-      - tailscale
-      - openvpn-connect
       - github
       - visual-studio-code
       - gpg-suite-no-mail
       - wezterm
-      # TODO: broken install
-      # - docker
-      # - slack
-      # - zoom
+      - docker
+      - zoom
+      - slack
+      - font-comic-mono
+    configure_dock: true
+    macos_dock_orientation: "bottom"
+    dockitems_persist:
+      - name: Launchpad
+        path: /System/Applications/Launchpad.app
+      - name: WezTerm
+        path: /Applications/WezTerm.app
+      - name: Firefox
+        path: /Applications/Firefox.app
+      - name: Visual Studio Code
+        path: /Applications/Visual Studio Code.app
+      - name: GitHub Desktop
+        path: /Applications/GitHub Desktop.app
+      - name: Activity Monitor
+        path: /System/Applications/Utilities/Activity Monitor.app
+      - name: App Store
+        path: /System/Applications/App Store.app
+      - name: System Preferences
+        path: /System/Applications/System Preferences.app
 
   roles:
-    - role: geerlingguy.mac.homebrew
+    - role: elliotweiser.osx-command-line-tools
+    - role: sculley.mac_setup.homebrew
       when: homebrew_installed_packages or homebrew_cask_apps or homebrew_taps
-      tags: ['homebrew']
-    - role: geerlingguy.mac.mas
+    - role: sculley.mac_setup.mas
       when: mas_installed_apps or mas_installed_app_ids or mas_uninstalled_apps
-      tags: ['mas']
+    - role: sculley.mac_setup.dock
