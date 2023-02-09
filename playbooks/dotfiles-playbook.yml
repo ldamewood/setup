@@ -35,6 +35,8 @@
         mode: "0644"
         content: |
           local wezterm = require 'wezterm'
+          local act = wezterm.action
+
           return {
             enable_scroll_bar = true,
             font = wezterm.font_with_fallback {
@@ -43,4 +45,8 @@
               "Noto Color Emoji",
               "Symbols Nerd Font Mono",
             },
+            keys = {
+              { key = 'LeftArrow', mods = 'SUPER', action = act.ActivateTabRelative(-1) },
+              { key = 'RightArrow', mods = 'SUPER', action = act.ActivateTabRelative(1) },
+            }
           }
