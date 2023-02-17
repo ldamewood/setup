@@ -14,6 +14,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Configure Homebrew cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/Library/Caches/Homebrew
+          ~/Library/Caches/Homebrew
+        key: brew-${{ hashFiles('playbooks/osx-playbook.yml') }}
+        restore-keys: brew-
+
     - name: Create secrets
       run: |
         echo "asdf" > .vault-password.txt
