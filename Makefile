@@ -42,5 +42,5 @@ venv/bin/pre-commit: venv/bin/python3
 	$^ -m pip install pre-commit
 	$@ install --install-hooks
 
-secrets.enc: venv/bin/ansible-vault
-	$^ encrypt --output $@ secrets
+secrets.enc: secrets venv/bin/ansible-vault
+	venv/bin/ansible-vault encrypt --output $@ $<
