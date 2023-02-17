@@ -17,6 +17,7 @@
       - homebrew/cask
       - homebrew/cask-fonts
     homebrew_installed_packages:
+      - mas
       - bazelisk
       - coreutils
       - direnv
@@ -45,6 +46,24 @@
       - wezterm
     configure_dock: true
     macos_dock_orientation: "bottom"
+    dockitems_remove:
+      - Safari
+      - Messages
+      - Mail
+      - Maps
+      - Photos
+      - FaceTime
+      - Calendar
+      - Contacts
+      - Reminders
+      - Notes
+      - Freeform
+      - TV
+      - Music
+      - News
+      - Keynote
+      - Numbers
+      - Pages
     dockitems_persist:
       - name: Launchpad
         path: /System/Applications/Launchpad.app
