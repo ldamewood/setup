@@ -25,4 +25,4 @@ jobs:
         EOF
 
     - name: Install dependencies
-      run: make setup-all
+      run: make test-all

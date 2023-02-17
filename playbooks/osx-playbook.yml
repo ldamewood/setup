@@ -86,8 +86,8 @@
       - name: App Store
         path: /System/Applications/App Store.app
         pos: 7
-      - name: System Preferences
-        path: /System/Applications/System Preferences.app
+      - name: System Settings
+        path: /System/Applications/System Settings.app
         pos: 8
 
   roles:
@@ -96,6 +96,7 @@
       when: homebrew_installed_packages or homebrew_cask_apps or homebrew_taps
     - role: sculley.mac_setup.mas
       when: mas_installed_apps or mas_installed_app_ids or mas_uninstalled_apps
+      tags: mas
     - role: sculley.mac_setup.dock
 
   tasks:
