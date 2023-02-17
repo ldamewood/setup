@@ -1,0 +1,7 @@
+# code: language=ansible
+- name: Setup macOS
+  ansible.builtin.import_playbook: osx-playbook.yml
+- name: Configure dot files
+  ansible.builtin.import_playbook: dotfiles-playbook.yml
+- name: Configure git
+  ansible.builtin.import_playbook: git-playbook.yml

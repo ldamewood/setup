@@ -22,46 +22,58 @@
       - homebrew/cask
       - homebrew/cask-fonts
     homebrew_installed_packages:
-      - gh
-      - git-delta
+      - bazelisk
+      - coreutils
       - direnv
+      - gh
+      - ghcup
+      - git-delta
+      - poetry
       - python@3.8
       - python@3.9
       - python@3.10
       - python@3.11
-      - ghcup
-      - poetry
+      - rust
       - the_silver_searcher
       - zsh
     homebrew_cask_apps:
-      - firefox
-      - github
-      - visual-studio-code
-      - gpg-suite-no-mail
-      - wezterm
+      - android-platform-tools
       - docker
-      - zoom
-      - slack
+      - firefox
       - font-comic-mono
+      - github
+      - gpg-suite-no-mail
+      - multipass
+      - raspberry-pi-imager
+      - visual-studio-code
+      - wezterm
     configure_dock: true
     macos_dock_orientation: "bottom"
     dockitems_persist:
       - name: Launchpad
         path: /System/Applications/Launchpad.app
+        pos: 1
       - name: WezTerm
         path: /Applications/WezTerm.app
+        pos: 2
       - name: Firefox
         path: /Applications/Firefox.app
+        pos: 3
       - name: Visual Studio Code
         path: /Applications/Visual Studio Code.app
+        pos: 4
       - name: GitHub Desktop
         path: /Applications/GitHub Desktop.app
+        pos: 5
       - name: Activity Monitor
         path: /System/Applications/Utilities/Activity Monitor.app
+        pos: 6
       - name: App Store
         path: /System/Applications/App Store.app
+        pos: 7
       - name: System Preferences
         path: /System/Applications/System Preferences.app
+        pos: 8
 
   roles:
     - role: elliotweiser.osx-command-line-tools
@@ -70,3 +82,47 @@
     - role: sculley.mac_setup.mas
       when: mas_installed_apps or mas_installed_app_ids or mas_uninstalled_apps
     - role: sculley.mac_setup.dock
+
+  tasks:
+    - name: Disable raspberry pi telemetry
+      community.general.osx_defaults:
+        domain: org.raspberrypi.Imager.plist
+        key: telemetry
+        type: bool
+        value: false
+        state: present
+    - name: Docker has launched before
+      community.general.osx_defaults:
+        domain: com.docker.docker
+        key: SUHasLaunchedBefore
+        type: bool
+        value: true
+        state: present
+    - name: GPGTools has launched before
+      community.general.osx_defaults:
+        domain: org.gpgtools.updater
+        key: SUHasLaunchedBefore
+        type: bool
+        value: true
+        state: present
+    - name: Don't use GPGMail
+      community.general.osx_defaults:
+        domain: org.gpgtools.gpgmail.upgrader
+        key: DontAskAgain
+        type: bool
+        value: true
+        state: present
+    - name: Set top-left hot corner
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: wvous-tl-corner
+        type: int
+        value: 2
+        state: present
+    - name: Set top-left hot corner
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: wvous-tl-modifier
+        type: int
+        value: 0
+        state: present
