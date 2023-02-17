@@ -23,6 +23,10 @@ test-%: playbooks/%-playbook.yml venv/bin/ansible-playbook secrets.enc .ansible
 		-e "ansible_python_interpreter=${SYSTEM_PYTHON}" \
 		--skip-tags skip-ci \
 		$<
+	venv/bin/ansible-playbook --connection local --inventory 127.0.0.1, --limit 127.0.0.1 \
+		-e "ansible_python_interpreter=${SYSTEM_PYTHON}" \
+		--skip-tags skip-ci \
+		$< | tail -n2 | grep changed=0
 
 lint: venv/bin/pre-commit .git
 	$< run -a
