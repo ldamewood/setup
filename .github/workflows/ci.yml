@@ -33,5 +33,8 @@ jobs:
         ansible_become_password: 
         EOF
 
-    - name: Install dependencies
+    - name: Test macos setup
       run: make test-all
+
+    - name: Idempotent test
+      run: make test-all | tail -n2 | grep changed=0
