@@ -8,13 +8,8 @@
     mas_installed_apps:
       - { id: 411643860, name: "DaisyDisk" }
       - { id: 937984704, name: "Amphetamine" }
-      - { id: 1475387142, name: TailScale}
-    mas_uninstalled_apps:
-      - { id: 408981434, name: "iMovie" }
-      - { id: 409183694, name: "Keynote" }
-      - { id: 409201541, name: "Pages" }
-      - { id: 409203825, name: "Numbers" }
-      - { id: 682658836, name: "GarageBand" }
+      - { id: 1475387142, name: "TailScale"}
+      - { id: 1497506650, name: "Yubico Authenticator"}
     homebrew_use_brewfile: false
     homebrew_taps:
       - homebrew/core
