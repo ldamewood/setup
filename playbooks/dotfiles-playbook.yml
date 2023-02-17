@@ -13,16 +13,20 @@
         dest: "{{ ansible_env.HOME }}/.zprofile"
         content: |
           eval "$(ssh-agent -s)"
-          case "${OSTYPE}|$(arch)" in
-            darwin*|i386)
+          case "${OSTYPE}-$(arch)" in
+            darwin*-i386)
               eval "$(/usr/local/bin/brew shellenv)"
               ;;
-            darwin*|aarch64)
+            darwin*-aarch64|darwin*-arm64)
               eval "$(/opt/homebrew/bin/brew shellenv)"
               ;;
+            *)
+              printf "Unknown environment: %s-%s" ${OSTYPE} $(arch)
           esac
           eval "$(direnv hook zsh)"
           eval "$(wezterm shell-completion --shell zsh)"
+          GIT_SSH_COMMAND="$(brew --prefix openssh)/bin/ssh"
+          export GIT_SSH_COMMAND
         mode: "0644"
     - name: "Hush the login prompt"
       ansible.builtin.copy:
