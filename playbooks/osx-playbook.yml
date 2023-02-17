@@ -96,8 +96,11 @@
       when: homebrew_installed_packages or homebrew_cask_apps or homebrew_taps
     - role: sculley.mac_setup.mas
       when: mas_installed_apps or mas_installed_app_ids or mas_uninstalled_apps
-      tags: mas
+      tags: 
+        - skip-ci
     - role: sculley.mac_setup.dock
+      tags: 
+        - skip-ci
 
   tasks:
     - name: Disable raspberry pi telemetry

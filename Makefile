@@ -21,7 +21,7 @@ setup-%: playbooks/%-playbook.yml venv/bin/ansible-playbook secrets.enc .ansible
 test-%: playbooks/%-playbook.yml venv/bin/ansible-playbook secrets.enc .ansible
 	venv/bin/ansible-playbook --connection local --inventory 127.0.0.1, --limit 127.0.0.1 \
 		-e "ansible_python_interpreter=${SYSTEM_PYTHON}" \
-		--skip-tags mas \
+		--skip-tags skip-ci \
 		$<
 
 lint: venv/bin/pre-commit .git
