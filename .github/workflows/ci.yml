@@ -12,16 +12,22 @@ jobs:
     runs-on: macos-latest
 
     steps:
+    - name: Show pre-installed brew config
+      run: brew config
+
+    - name: Pre-condition on the cache directory.
+      run: |
+        brew --cache
+        [[ "$(brew --cache)" = "$HOME/Library/Caches/Homebrew" ]]
+
     - uses: actions/checkout@v3
 
     - name: Configure Homebrew cache
       uses: actions/cache@v3
       with:
-        path: |
-          ~/Library/Caches/Homebrew
-          ~/Library/Caches/Homebrew
-        key: brew-${{ hashFiles('playbooks/osx-playbook.yml') }}
-        restore-keys: brew-
+        path: ~/Library/Caches/Homebrew
+        key: v0-brew-
+        restore-keys: v0-brew-
 
     - name: Create secrets
       run: |
