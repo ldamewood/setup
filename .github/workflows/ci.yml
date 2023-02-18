@@ -37,4 +37,4 @@ jobs:
       run: make test-all
 
     - name: Idempotent test
-      run: make test-all | tail -n2 | grep changed=0
+      run: make test-all | grep "^PLAY RECAP \*" -A1 | grep "changed=0"

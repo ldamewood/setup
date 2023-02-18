@@ -33,7 +33,6 @@ clean:
 .ansible: requirements.yml
 	venv/bin/ansible-galaxy install -r $<
 
-
 .git:
 	git init .
 
